@@ -23,6 +23,8 @@ Morte = pygame.font.SysFont('arial',120)
 white = (255,255,255)
 black = (0,0,0)
 
+
+
 def jogar():
     largura_janela = 300
     altura_janela = 50 
@@ -59,30 +61,57 @@ def jogar():
 
     root.mainloop()
 
-    posicaoX = 400 
-    posicaoY = 300 
-    movimentoX = 0
-    movimentoY = 0
-
     
-    larguraPersonagem = 250
-    alturaPersonagem = 127
+    largura_personagem = 50
+    altura_personagem = 50
+    posicaoX= 10 
+    posicaoY= 275  
+    velocidade = 5
+    movimento_y = 0
 
     while True :
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT:
                 quit()
+            
 
+            elif evento.type == pygame.KEYDOWN:
+                if evento.key == pygame.K_UP:
+                    movimento_y = -velocidade
+                elif evento.key == pygame.K_DOWN:
+                    movimento_y= velocidade
+
+
+            elif evento.type == pygame.KEYUP:
+                if evento.key == pygame.K_UP or evento.key == pygame.K_DOWN:
+                    movimento_y = 0
+
+
+        posicaoY += movimento_y
+
+        if posicaoY < 0:
+            posicaoY = 0
+        elif posicaoY > tamanho [1] - altura_personagem:
+            posicaoY = tamanho[1] - altura_personagem
 
 
 
         tela.fill(white)
-        tela.blit(startgame, (0,0))
+        tela.blit(startgame, (0, 0))
         tela.blit(banguela, (posicaoX, posicaoY))
-
         pygame.display.update()
         relogio.tick(60)
+            
+
+
+
+
+
+
+
+        
 
 
     
 jogar()
+
